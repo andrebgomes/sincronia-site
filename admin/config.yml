@@ -2,6 +2,8 @@ backend:
   name: github
   repo: andrebgomes/sincronia-site
   branch: main
+  base_url: https://sincronia-oauth.ag-bento12.workers.dev
+  auth_endpoint: auth
 
 media_folder: "uploads"
 public_folder: "/uploads"
