@@ -89,10 +89,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--dark-bg);
+            background-color: var(--dark-bg);
             position: relative;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
         }
 
         .hero-content {
@@ -603,7 +604,15 @@
             if (hero) {
                 heroText.textContent = hero.texto || '';
                 if (hero.imagem) {
+                    // Garantir que a imagem cobre toda a área
                     heroSection.style.backgroundImage = `url('${hero.imagem}')`;
+                    heroSection.style.backgroundSize = 'cover';
+                    heroSection.style.backgroundPosition = 'center';
+                    heroSection.style.backgroundRepeat = 'no-repeat';
+                }
+                // Aplicar cor ao texto se definida
+                if (hero.cor && heroText) {
+                    heroText.style.color = hero.cor;
                 }
             }
         }
@@ -617,18 +626,27 @@
             }
         }
 
-        // Carregar Projetos
+        // Carregar Projetos (dinamicamente de todos os ficheiros na pasta)
         async function carregarProjetos() {
             const portfolioGrid = document.getElementById('portfolio-grid');
             
-            const projetosFiles = [
-                'festival.json',
-                'performance.json',
-                'teatro.json',
-                'danca.json',
-                'concerto1.json',
-                'concerto2.json'
-            ];
+            // Tentar carregar índice, senão usar lista hardcoded como fallback
+            let projetosFiles = [];
+            const index = await fetchJSON(`${DATA_PATH}/index.json`);
+            
+            if (index && index.projetos) {
+                projetosFiles = index.projetos;
+            } else {
+                // Fallback para ficheiros conhecidos
+                projetosFiles = [
+                    '2024-11-25-festival-artistas.json',
+                    '2024-11-25-performance-show.json',
+                    '2024-11-25-teatro-espectaculo.json',
+                    '2024-11-25-danca-moderna.json',
+                    '2024-11-25-concerto-tour.json',
+                    '2024-11-25-concerto-arena.json'
+                ];
+            }
 
             portfolioGrid.innerHTML = '';
             
@@ -654,31 +672,49 @@
             }
         }
 
-        // Carregar Equipa
+        // Carregar Equipa (dinamicamente de todos os ficheiros na pasta)
         async function carregarEquipa() {
             const teamGrid = document.getElementById('team-grid');
             
-            const equipaFiles = [
-                'pedro.json',
-                'sergio.json',
-                'gabriel.json'
-            ];
+            // Tentar carregar índice, senão usar lista hardcoded como fallback
+            let equipaFiles = [];
+            const index = await fetchJSON(`${DATA_PATH}/index.json`);
+            
+            if (index && index.equipa) {
+                equipaFiles = index.equipa;
+            } else {
+                // Fallback para ficheiros conhecidos
+                equipaFiles = [
+                    'pedro-santos.json',
+                    'sergio-moreira.json',
+                    'gabriel-vicente.json'
+                ];
+            }
 
             teamGrid.innerHTML = '';
             
+            // Carregar todos e ordenar por "ordem"
+            const membros = [];
             for (const file of equipaFiles) {
                 const membro = await fetchJSON(`${DATA_PATH}/equipa/${file}`);
                 if (membro) {
-                    const item = document.createElement('div');
-                    item.className = 'team-member';
-                    item.innerHTML = `
-                        <img src="${membro.foto}" alt="${membro.nome}" class="team-photo">
-                        <div class="team-name">${membro.nome}</div>
-                        <div class="team-role">${membro.cargo}</div>
-                    `;
-                    teamGrid.appendChild(item);
+                    membros.push(membro);
                 }
             }
+            
+            // Ordenar por campo "ordem"
+            membros.sort((a, b) => (a.ordem || 999) - (b.ordem || 999));
+            
+            membros.forEach(membro => {
+                const item = document.createElement('div');
+                item.className = 'team-member';
+                item.innerHTML = `
+                    <img src="${membro.foto}" alt="${membro.nome}" class="team-photo">
+                    <div class="team-name">${membro.nome}</div>
+                    <div class="team-role">${membro.cargo}</div>
+                `;
+                teamGrid.appendChild(item);
+            });
 
             if (teamGrid.children.length === 0) {
                 teamGrid.innerHTML = '<div class="loading">Nenhum membro encontrado.</div>';
