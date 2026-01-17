@@ -1,0 +1,47 @@
+name: Atualizar Index
+
+on:
+  push:
+    paths:
+      - '_data/projetos/**'
+      - '_data/equipa/**'
+    branches:
+      - main
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Gerar index.json
+        run: |
+          # Criar lista de projetos
+          PROJETOS=$(ls -1 _data/projetos/*.json 2>/dev/null | xargs -I {} basename {} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          
+          # Criar lista de equipa
+          EQUIPA=$(ls -1 _data/equipa/*.json 2>/dev/null | xargs -I {} basename {} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          
+          # Gerar index.json
+          echo "{\"projetos\": $PROJETOS, \"equipa\": $EQUIPA}" | jq '.' > _data/index.json
+          
+          echo "Index gerado:"
+          cat _data/index.json
+
+      - name: Commit e Push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add _data/index.json
+          
+          # Só fazer commit se houver alterações
+          if git diff --staged --quiet; then
+            echo "Sem alterações no index.json"
+          else
+            git commit -m "🔄 Atualizar index.json automaticamente"
+            git push
+          fi
