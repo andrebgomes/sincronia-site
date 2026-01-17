@@ -1,0 +1,15 @@
+{
+  "projetos": [
+    "2024-11-25-concerto-arena.json",
+    "2024-11-25-concerto-tour.json",
+    "2024-11-25-danca-moderna.json",
+    "2024-11-25-festival-artistas.json",
+    "2024-11-25-performance-show.json",
+    "2024-11-25-teatro-espectaculo.json"
+  ],
+  "equipa": [
+    "gabriel-vicente.json",
+    "pedro-santos.json",
+    "sergio-moreira.json"
+  ]
+}
