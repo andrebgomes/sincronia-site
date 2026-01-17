@@ -1,0 +1,78 @@
+backend:
+  name: github
+  repo: andrebgomes/sincronia-site
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+locale: 'pt'
+
+collections:
+  # Projetos Portfolio
+  - name: "projetos"
+    label: "Projetos"
+    folder: "_data/projetos"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "titulo"
+    fields:
+      - {label: "Título", name: "titulo", widget: "string"}
+      - {label: "Categoria", name: "categoria", widget: "select", options: ["FESTIVAL", "PERFORMANCE", "TEATRO", "DANÇA", "CONCERTO"]}
+      - {label: "Descrição Curta", name: "descricao", widget: "string"}
+      - {label: "Imagem", name: "imagem", widget: "image"}
+
+  # Membros da Equipa
+  - name: "equipa"
+    label: "Equipa"
+    folder: "_data/equipa"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "nome"
+    fields:
+      - {label: "Nome", name: "nome", widget: "string"}
+      - {label: "Cargo", name: "cargo", widget: "string"}
+      - {label: "Foto", name: "foto", widget: "image"}
+      - {label: "Ordem", name: "ordem", widget: "number", default: 1, value_type: "int"}
+
+  # Configurações Gerais
+  - name: "config"
+    label: "Configurações"
+    files:
+      - label: "Informações Gerais"
+        name: "geral"
+        file: "_data/config.json"
+        fields:
+          - {label: "Título do Site", name: "titulo", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Telefone", name: "telefone", widget: "string"}
+          - {label: "Instagram", name: "instagram", widget: "string", required: false}
+          - {label: "Facebook", name: "facebook", widget: "string", required: false}
+
+      - label: "Serviços"
+        name: "servicos"
+        file: "_data/servicos.json"
+        fields:
+          - label: "Lista de Serviços"
+            name: "servicos"
+            widget: "list"
+            fields:
+              - {label: "Serviço", name: "texto", widget: "string"}
+
+      - label: "Parceiros"
+        name: "parceiros"
+        file: "_data/parceiros.json"
+        fields:
+          - label: "Lista de Parceiros"
+            name: "parceiros"
+            widget: "list"
+            fields:
+              - {label: "Nome", name: "nome", widget: "string"}
+              - {label: "Logo", name: "logo", widget: "image"}
+
+      - label: "Hero (Imagem Principal)"
+        name: "hero"
+        file: "_data/hero.json"
+        fields:
+          - {label: "Texto Principal", name: "texto", widget: "string", required: false, hint: "Deixe vazio se não quiser texto"}
+          - {label: "Imagem de Fundo", name: "imagem", widget: "image"}

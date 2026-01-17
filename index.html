@@ -25,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
         }
@@ -92,6 +91,8 @@
             justify-content: center;
             background: var(--dark-bg);
             position: relative;
+            background-size: cover;
+            background-position: center;
         }
 
         .hero-content {
@@ -171,6 +172,13 @@
             font-size: 0.9rem;
             color: var(--gray-text);
             font-weight: 300;
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--gray-text);
         }
 
         /* Team Section */
@@ -352,7 +360,7 @@
         }
 
         .partner-logo {
-            height: 60px;
+            height: 80px;
             filter: grayscale(100%) brightness(0.5);
             transition: all 0.3s;
         }
@@ -379,6 +387,13 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
 
@@ -449,13 +464,6 @@
                 color: var(--primary-red);
             }
 
-            @keyframes slideIn {
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-
             .hero h1 {
                 font-size: 5rem;
             }
@@ -481,7 +489,7 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">SINCRONIA</div>
+        <div class="logo" id="site-title">SINCRONIA</div>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -496,89 +504,24 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" style="background-image: url('first.jpeg'); background-size: cover; background-position: center;">
+    <section class="hero" id="hero-section">
+        <div class="hero-content">
+            <h1 id="hero-text"></h1>
+        </div>
     </section>
 
     <!-- Portfolio Section -->
     <section class="portfolio" id="projetos">
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <img src="festival.jpeg" alt="Festival">
-                <div class="portfolio-overlay">
-                    <div class="portfolio-category">FESTIVAL</div>
-                    <div class="portfolio-title">ARTISTAS PORTUGUESES</div>
-                    <div class="portfolio-description">Design e produção técnica</div>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <img src="performance.jpeg" alt="Performance">
-                <div class="portfolio-overlay">
-                    <div class="portfolio-category">PERFORMANCE</div>
-                    <div class="portfolio-title">SHOW AO VIVO</div>
-                    <div class="portfolio-description">Iluminação e vídeo mapping</div>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <img src="teatro.jpeg" alt="Teatro">
-                <div class="portfolio-overlay">
-                    <div class="portfolio-category">TEATRO</div>
-                    <div class="portfolio-title">ESPECTÁCULO TEATRAL</div>
-                    <div class="portfolio-description">Cenografia e luz</div>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <img src="danca.jpeg" alt="Dança">
-                <div class="portfolio-overlay">
-                    <div class="portfolio-category">DANÇA</div>
-                    <div class="portfolio-title">COREOGRAFIA MODERNA</div>
-                    <div class="portfolio-description">Design de luz e projeção</div>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <img src="concerto1.jpeg" alt="Concerto">
-                <div class="portfolio-overlay">
-                    <div class="portfolio-category">CONCERTO</div>
-                    <div class="portfolio-title">TOUR NACIONAL</div>
-                    <div class="portfolio-description">Produção completa</div>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <img src="concerto2.jpeg" alt="Concerto">
-                <div class="portfolio-overlay">
-                    <div class="portfolio-category">CONCERTO</div>
-                    <div class="portfolio-title">ARENA SHOW</div>
-                    <div class="portfolio-description">Design e operação técnica</div>
-                </div>
-            </div>
+        <div class="portfolio-grid" id="portfolio-grid">
+            <div class="loading">A carregar projetos...</div>
         </div>
     </section>
 
     <!-- Team Section -->
     <section class="team" id="equipa">
         <h2 class="section-title">EQUIPA</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <img src="pedro.jpeg" alt="Pedro Santos" class="team-photo">
-                <div class="team-name">PEDRO SANTOS</div>
-                <div class="team-role">CEO</div>
-            </div>
-
-            <div class="team-member">
-                <img src="sergio.jpeg" alt="Sérgio Moreira" class="team-photo">
-                <div class="team-name">SÉRGIO MOREIRA</div>
-                <div class="team-role">ALANCA 1</div>
-            </div>
-
-            <div class="team-member">
-                <img src="gabriel.jpeg" alt="Gabriel Vicente" class="team-photo">
-                <div class="team-name">GABRIEL VICENTE</div>
-                <div class="team-role">ALANCA 2</div>
-            </div>
+        <div class="team-grid" id="team-grid">
+            <div class="loading">A carregar equipa...</div>
         </div>
     </section>
 
@@ -588,13 +531,8 @@
             <h2 class="services-title">Show Design</h2>
             <p class="services-subtitle">As soluções mais criativas estão aqui</p>
             
-            <div class="services-list">
-                <div class="service-item">Direcção e coordenação técnica</div>
-                <div class="service-item">Desenho, programação e operação Luz</div>
-                <div class="service-item">Montagem de espectáculos</div>
-                <div class="service-item">Modelação e simulação 3D para eventos</div>
-                <div class="service-item">Dispomos de algum equipamento para alugar</div>
-                <div class="service-item">Alugamos espaço para ensaios</div>
+            <div class="services-list" id="services-list">
+                <div class="loading">A carregar serviços...</div>
             </div>
         </div>
     </section>
@@ -630,19 +568,179 @@
     <!-- Partners Section -->
     <section class="partners">
         <h2 class="section-title">PARCEIROS</h2>
-        <div class="partners-grid">
-            <img src="garret.jpeg" alt="Garret" class="partner-logo" style="height: 80px;">
-            <!-- Adiciona mais logos de parceiros aqui -->
+        <div class="partners-grid" id="partners-grid">
+            <div class="loading">A carregar parceiros...</div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 SINCRONIA. Todos os direitos reservados.</p>
+        <p>&copy; <span id="current-year">2024</span> <span id="footer-title">SINCRONIA</span>. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        // Hamburger menu toggle
+        // Configuração base
+        const DATA_PATH = '_data';
+
+        // Função auxiliar para buscar JSON
+        async function fetchJSON(path) {
+            try {
+                const response = await fetch(path);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                return await response.json();
+            } catch (error) {
+                console.error(`Erro ao carregar ${path}:`, error);
+                return null;
+            }
+        }
+
+        // Carregar Hero
+        async function carregarHero() {
+            const hero = await fetchJSON(`${DATA_PATH}/hero.json`);
+            const heroSection = document.getElementById('hero-section');
+            const heroText = document.getElementById('hero-text');
+            
+            if (hero) {
+                heroText.textContent = hero.texto || '';
+                if (hero.imagem) {
+                    heroSection.style.backgroundImage = `url('${hero.imagem}')`;
+                }
+            }
+        }
+
+        // Carregar Config Geral
+        async function carregarConfig() {
+            const config = await fetchJSON(`${DATA_PATH}/config.json`);
+            if (config) {
+                document.getElementById('site-title').textContent = config.titulo || 'SINCRONIA';
+                document.getElementById('footer-title').textContent = config.titulo || 'SINCRONIA';
+            }
+        }
+
+        // Carregar Projetos
+        async function carregarProjetos() {
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            
+            const projetosFiles = [
+                'festival.json',
+                'performance.json',
+                'teatro.json',
+                'danca.json',
+                'concerto1.json',
+                'concerto2.json'
+            ];
+
+            portfolioGrid.innerHTML = '';
+            
+            for (const file of projetosFiles) {
+                const projeto = await fetchJSON(`${DATA_PATH}/projetos/${file}`);
+                if (projeto) {
+                    const item = document.createElement('div');
+                    item.className = 'portfolio-item';
+                    item.innerHTML = `
+                        <img src="${projeto.imagem}" alt="${projeto.titulo}">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-category">${projeto.categoria}</div>
+                            <div class="portfolio-title">${projeto.titulo}</div>
+                            <div class="portfolio-description">${projeto.descricao}</div>
+                        </div>
+                    `;
+                    portfolioGrid.appendChild(item);
+                }
+            }
+
+            if (portfolioGrid.children.length === 0) {
+                portfolioGrid.innerHTML = '<div class="loading">Nenhum projeto encontrado.</div>';
+            }
+        }
+
+        // Carregar Equipa
+        async function carregarEquipa() {
+            const teamGrid = document.getElementById('team-grid');
+            
+            const equipaFiles = [
+                'pedro.json',
+                'sergio.json',
+                'gabriel.json'
+            ];
+
+            teamGrid.innerHTML = '';
+            
+            for (const file of equipaFiles) {
+                const membro = await fetchJSON(`${DATA_PATH}/equipa/${file}`);
+                if (membro) {
+                    const item = document.createElement('div');
+                    item.className = 'team-member';
+                    item.innerHTML = `
+                        <img src="${membro.foto}" alt="${membro.nome}" class="team-photo">
+                        <div class="team-name">${membro.nome}</div>
+                        <div class="team-role">${membro.cargo}</div>
+                    `;
+                    teamGrid.appendChild(item);
+                }
+            }
+
+            if (teamGrid.children.length === 0) {
+                teamGrid.innerHTML = '<div class="loading">Nenhum membro encontrado.</div>';
+            }
+        }
+
+        // Carregar Serviços
+        async function carregarServicos() {
+            const servicesList = document.getElementById('services-list');
+            const servicos = await fetchJSON(`${DATA_PATH}/servicos.json`);
+            
+            if (!servicos || !servicos.servicos || servicos.servicos.length === 0) {
+                servicesList.innerHTML = '<div class="loading">Nenhum serviço encontrado.</div>';
+                return;
+            }
+
+            servicesList.innerHTML = '';
+            
+            servicos.servicos.forEach(servico => {
+                const item = document.createElement('div');
+                item.className = 'service-item';
+                item.textContent = servico.texto;
+                servicesList.appendChild(item);
+            });
+        }
+
+        // Carregar Parceiros
+        async function carregarParceiros() {
+            const partnersGrid = document.getElementById('partners-grid');
+            const parceiros = await fetchJSON(`${DATA_PATH}/parceiros.json`);
+            
+            if (!parceiros || !parceiros.parceiros || parceiros.parceiros.length === 0) {
+                partnersGrid.innerHTML = '<div class="loading">Nenhum parceiro encontrado.</div>';
+                return;
+            }
+
+            partnersGrid.innerHTML = '';
+            
+            parceiros.parceiros.forEach(parceiro => {
+                const item = document.createElement('img');
+                item.src = parceiro.logo;
+                item.alt = parceiro.nome;
+                item.className = 'partner-logo';
+                partnersGrid.appendChild(item);
+            });
+        }
+
+        // Inicializar tudo quando página carrega
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            await Promise.all([
+                carregarHero(),
+                carregarConfig(),
+                carregarProjetos(),
+                carregarEquipa(),
+                carregarServicos(),
+                carregarParceiros()
+            ]);
+        });
+
+        // Hamburger menu
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
@@ -650,14 +748,13 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
             });
         });
 
-        // Smooth scroll for navigation
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -678,11 +775,11 @@
             this.reset();
         });
 
-        // Parallax effect on hero
+        // Parallax effect
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
+            const hero = document.getElementById('hero-section');
+            if (hero && scrolled < window.innerHeight) {
                 hero.style.transform = `translateY(${scrolled * 0.5}px)`;
             }
         });
