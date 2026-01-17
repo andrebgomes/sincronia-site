@@ -17,6 +17,8 @@ collections:
     folder: "_data/projetos"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     identifier_field: "titulo"
     fields:
       - {label: "Título", name: "titulo", widget: "string"}
@@ -30,6 +32,8 @@ collections:
     folder: "_data/equipa"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     identifier_field: "nome"
     fields:
       - {label: "Nome", name: "nome", widget: "string"}
